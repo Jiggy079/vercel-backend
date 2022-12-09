@@ -1,20 +1,16 @@
 const { Router } = require('express');
-const dbo = require("../../db/conn");
+const Figure = require("../../models/figure");
 
 const r = Router();
 
-r.get("/figures", async function (req, res) {
-	const dbConnect = dbo.getDB();
-	dbConnect
-		.collection("figures")
-		.find({})
-		.toArray(function (err, result) {
-			if (err) {
-				res.status(400).send("Error fetching figures.");
-			} else {
-				res.json(result);
-			}
-		});
+r.get("/figures/:index", async function (req, res) {
+	try {
+		const data = await Figure.findById(req.params.index);
+		res.json(data);
+	} catch (error) {
+		res.status(500).json({message: error.message});
+	}
+
 });
 
 module.exports = r;
