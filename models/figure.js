@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 
-await mongoose.connect(process.env.MONGODB_URI);
+mongoose.connect(process.env.MONGODB_URI);
 
 const figureSchema = new mongoose.Schema({
 	imageID: {
