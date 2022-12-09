@@ -16,3 +16,5 @@ r.get("/figures", async function (req, res) {
 			}
 		});
 });
+
+module.exports = r;
