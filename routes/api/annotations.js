@@ -18,8 +18,9 @@ r.post("/annotations/:index", async function (req, res) {
 	try {
 		const filter = {imageID: parseInt(req.params.index)};
 		const newData = req.body;
-		const doc = await Annotation.findOneAndUpdate(filter, newData, {new: true});
-		res.json(new SuccessResponseObject("sucessfully updated", doc));
+		console.log(newData);
+		const doc = await Annotation.updateOne(filter, newData);
+		res.json(new SuccessResponseObject("sucessfully updated"));
 	} catch (error) {
 		res.status(500).json({message: error.message});
 	}
