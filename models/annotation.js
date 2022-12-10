@@ -3,29 +3,35 @@ const mongoose = require("mongoose");
 mongoose.set('strictQuery', true);
 mongoose.connect(process.env.MONGODB_URI);
 
-const figureSchema = new mongoose.Schema({
+const annotationSchema = new mongoose.Schema({
 	imageID: {
 		required: true,
 		type: Number
 	},
-	name: {
+	type: {
 		required: true,
 		type: String
 	},
-	url: {
+	usage: {
 		required: true,
 		type: String
 	},
-	doi: {
+	legend: {
 		required: true,
 		type: String
 	},
-	year: {
+	mappingtype: {
+		required: true,
+		type: String
+	},
+	amount: {
+		required: true,
+		type: String
+	},
+	difficulty: {
 		required: true,
 		type: Number
 	}
 });
 
-module.exports = mongoose.model("Figure", figureSchema);
-
-
+module.exports = mongoose.model("Annotation", annotationSchema);

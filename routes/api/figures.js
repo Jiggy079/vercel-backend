@@ -1,6 +1,5 @@
 const { Router } = require('express');
 const Figure = require("../../models/figure");
-const { SuccessResponseObject } = require('../../common/http');
 
 const r = Router();
 
