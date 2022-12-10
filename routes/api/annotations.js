@@ -1,5 +1,6 @@
 const { Router } = require('express');
 const Annotation = require("../../models/annotation");
+const { SuccessResponseObject } = require('../../common/http');
 
 
 const r = Router();
@@ -13,12 +14,15 @@ r.get("/annotations/:index", async function (req, res) {
 	}
 });
 
-// r.post("/annotations/:index", async function (req, res) {
-// 	try {
-//
-// 	} catch (error) {
-// 		res.status(500).json({message: error.message});
-// 	}
-// });
+r.post("/annotations/:index", async function (req, res) {
+	try {
+		const imageID = parseInt(req.params.index);
+		const newData = req.body;
+		const doc = await Annotation.findOneAndUpdate({imageID: imageID}, newData, {new: true});
+		res.json(new SuccessResponseObject("sucessfully updated", doc));
+	} catch (error) {
+		res.status(500).json({message: error.message});
+	}
+});
 
 module.exports = r;
