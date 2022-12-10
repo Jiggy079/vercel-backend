@@ -16,16 +16,10 @@ r.get("/annotations/:index", async function (req, res) {
 
 r.post("/annotations/:index", async function (req, res) {
 	try {
+		const filter = {imageID: parseInt(req.params.index)};
 		const newData = req.body;
-		const data = await Annotation.find({imageID: parseInt(req.params.index)}).exec();
-		data.type = newData["type"];
-		data.usage = newData["usage"];
-		data.legend = newData["legend"];
-		data.mappingtype = newData["mappingtype"];
-		data.amount = newData["amount"];
-		data.difficulty = newData["difficulty"];
-		data.then((doc) => doc.save());
-		res.json(new SuccessResponseObject("sucessfully updated", data));
+		const doc = await Annotation.findOneAndUpdate(filter, newData, {new: true});
+		res.json(new SuccessResponseObject("sucessfully updated", doc));
 	} catch (error) {
 		res.status(500).json({message: error.message});
 	}

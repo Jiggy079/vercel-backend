@@ -30,7 +30,7 @@ const annotationSchema = new mongoose.Schema({
 	},
 	difficulty: {
 		required: true,
-		type: Number
+		type: String
 	}
 });
 
