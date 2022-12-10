@@ -24,7 +24,7 @@ r.post("/annotations/:index", async function (req, res) {
 		data.mappingtype = newData["mappingtype"];
 		data.amount = newData["amount"];
 		data.difficulty = newData["difficulty"];
-		await data.save();
+		data.then((doc) => doc.save());
 		res.json(new SuccessResponseObject("sucessfully updated", data));
 	} catch (error) {
 		res.status(500).json({message: error.message});
