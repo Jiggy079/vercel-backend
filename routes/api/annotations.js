@@ -17,7 +17,7 @@ r.get("/annotations/:index", async function (req, res) {
 r.post("/annotations/:index", async function (req, res) {
 	try {
 		const newData = req.body;
-		const data = await Annotation.find({imageID: parseInt(req.params.index)});
+		const data = await Annotation.find({imageID: parseInt(req.params.index)}).exec();
 		data.type = newData["type"];
 		data.usage = newData["usage"];
 		data.legend = newData["legend"];
